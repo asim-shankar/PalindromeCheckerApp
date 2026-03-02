@@ -13,6 +13,21 @@ public class PalindromeCheckerApp {
             this.next = null;
         }
     }
+    public static boolean isPalindrome5(String str, int start, int end) {
+
+        // Base Condition: If start crosses end, string is palindrome
+        if (start >= end) {
+            return true;
+        }
+
+        // If characters at start and end are not equal
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call for inner substring
+        return isPalindrome5(str, start + 1, end - 1);
+    }
 
     public static void main(String[] args) {
 
@@ -245,6 +260,17 @@ public class PalindromeCheckerApp {
         System.out.println("Input String : " + input4);
 
         if (isPalindrome4) {
+            System.out.println("Result : The given string is a Palindrome.");
+        } else {
+            System.out.println("Result : The given string is NOT a Palindrome.");
+        }
+        String input5 = "madam";
+
+        boolean result = isPalindrome5(input, 0, input.length() - 1);
+
+        System.out.println("Input String : " + input5);
+
+        if (result) {
             System.out.println("Result : The given string is a Palindrome.");
         } else {
             System.out.println("Result : The given string is NOT a Palindrome.");
