@@ -14,5 +14,17 @@ public class PalindromeCheckerApp {
         // Application Flow Control Message
         System.out.println("Application started successfully.");
         System.out.println("Proceeding to next use case...");
+        String word = "madam";
+        String reversed = "";
+        // Reverse the string
+        for (int i = word.length() - 1; i >= 0; i--) {
+            reversed = reversed + word.charAt(i);
+        }
+        // Check Palindrome using if-else
+        if (word.equals(reversed)) {
+            System.out.println("The given word \"" + word + "\" is a Palindrome.");
+        } else {
+            System.out.println("The given word \"" + word + "\" is NOT a Palindrome.");
+        }
     }
 }
