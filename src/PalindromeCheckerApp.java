@@ -275,6 +275,36 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : The given string is NOT a Palindrome.");
         }
+        String input6 = "A man a plan a canal Panama";
+
+        // Step 1: Normalize string
+        // Remove spaces and convert to lowercase
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+
+        // Step 2: Apply palindrome logic (two-pointer approach)
+        int start1 = 0;
+        int end1 = normalized.length() - 1;
+
+        boolean isPalindrome6 = true;
+
+        while (start1 < end1) {
+            if (normalized.charAt(start1) != normalized.charAt(end1)) {
+                isPalindrome6 = false;
+                break;
+            }
+            start1++;
+            end1--;
+        }
+
+        // Display results
+        System.out.println("Original String   : " + input6);
+        System.out.println("Normalized String : " + normalized);
+
+        if (isPalindrome6) {
+            System.out.println("Result : The given string is a Palindrome (ignoring case & spaces).");
+        } else {
+            System.out.println("Result : The given string is NOT a Palindrome.");
+        }
 
     }
     }
