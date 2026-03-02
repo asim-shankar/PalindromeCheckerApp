@@ -48,5 +48,34 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : The given string is NOT a Palindrome.");
         }
+        // Hardcoded String
+        String input = "racecar";
+
+        // Convert String to character array
+        char[] characters = input.toCharArray();
+
+        // Two-pointer technique
+        int start = 0;
+        int end = characters.length - 1;
+
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (characters[start] != characters[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        // Display result
+        System.out.println("Input String : " + input);
+
+        if (isPalindrome) {
+            System.out.println("Result : The given string is a Palindrome.");
+        } else {
+            System.out.println("Result : The given string is NOT a Palindrome.");
+        }
     }
 }
