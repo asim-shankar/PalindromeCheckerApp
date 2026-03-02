@@ -4,6 +4,15 @@ import java.util.Queue;
 import java.util.Deque;
 import java.util.LinkedList;
 public class PalindromeCheckerApp {
+    static class Node {
+        char data;
+        Node next;
+
+        Node(char data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -175,6 +184,67 @@ public class PalindromeCheckerApp {
         System.out.println("Input String : " + input3);
 
         if (isPalindrome3) {
+            System.out.println("Result : The given string is a Palindrome.");
+        } else {
+            System.out.println("Result : The given string is NOT a Palindrome.");
+        }
+        String input4 = "level";
+
+        // Convert string to singly linked list
+        Node head = null;
+        Node tail = null;
+
+        for (int i = 0; i < input4.length(); i++) {
+            Node newNode = new Node(input.charAt(i));
+
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+
+        // Step 1: Find middle using Fast & Slow pointer
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Step 2: Reverse second half (in-place)
+        Node prev = null;
+        Node current = slow;
+
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+
+        // Step 3: Compare first half and reversed second half
+        Node firstHalf = head;
+        Node secondHalf = prev;
+
+        boolean isPalindrome4 = true;
+
+        while (secondHalf != null) {
+            if (firstHalf.data != secondHalf.data) {
+                isPalindrome4 = false;
+                break;
+            }
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+
+        // Print result
+        System.out.println("Input String : " + input4);
+
+        if (isPalindrome4) {
             System.out.println("Result : The given string is a Palindrome.");
         } else {
             System.out.println("Result : The given string is NOT a Palindrome.");
