@@ -28,6 +28,71 @@ public class PalindromeCheckerApp {
         // Recursive call for inner substring
         return isPalindrome5(str, start + 1, end - 1);
     }
+    interface PalindromeStrategy {
+        boolean checkPalindrome(String input);
+    }
+    static class StackStrategy implements PalindromeStrategy {
+
+        @Override
+        public boolean checkPalindrome(String input) {
+
+            Stack<Character> stack = new Stack<>();
+
+            // Push all characters to stack
+            for (int i = 0; i < input.length(); i++) {
+                stack.push(input.charAt(i));
+            }
+
+            // Compare with original string
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) != stack.pop()) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+    static class DequeStrategy implements PalindromeStrategy {
+
+        @Override
+        public boolean checkPalindrome(String input) {
+
+            Deque<Character> deque = new LinkedList<>();
+
+            // Add characters to deque
+            for (int i = 0; i < input.length(); i++) {
+                deque.addLast(input.charAt(i));
+            }
+
+            // Compare front and rear
+            while (deque.size() > 1) {
+                char front = deque.removeFirst();
+                char rear = deque.removeLast();
+
+                if (front != rear) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+    static class PalindromeService {
+
+        private PalindromeStrategy strategy;
+
+        // Inject strategy via constructor
+        public PalindromeService(PalindromeStrategy strategy) {
+            this.strategy = strategy;
+        }
+
+        public boolean execute(String input) {
+            return strategy.checkPalindrome(input);
+        }
+    }
+
+
 
     public static void main(String[] args) {
 
@@ -305,6 +370,34 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : The given string is NOT a Palindrome.");
         }
+        System.out.println("==========================================");
+        System.out.println("   UC12: Strategy Pattern Palindrome App ");
+        System.out.println("==========================================");
 
+        String input7 = "madam";
+
+        // Choose Strategy at Runtime
+        PalindromeStrategy stackStrategy = new StackStrategy();
+        PalindromeService service1 = new PalindromeService(stackStrategy);
+
+        boolean result1 = service1.execute(input);
+
+        System.out.println("Using Stack Strategy:");
+        System.out.println("Input String : " + input7);
+        System.out.println("Result : " + (result1 ? "Palindrome" : "Not a Palindrome"));
+
+        System.out.println("------------------------------------------");
+
+        PalindromeStrategy dequeStrategy = new DequeStrategy();
+        PalindromeService service2 = new PalindromeService(dequeStrategy);
+
+        boolean result2 = service2.execute(input);
+
+        System.out.println("Using Deque Strategy:");
+        System.out.println("Input String : " + input7);
+        System.out.println("Result : " + (result2 ? "Palindrome" : "Not a Palindrome"));
+
+        System.out.println("==========================================");
+        System.out.println("Application Finished Successfully.");
     }
     }
