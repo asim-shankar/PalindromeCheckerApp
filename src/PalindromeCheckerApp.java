@@ -1,3 +1,5 @@
+
+import java.util.Stack;
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -77,5 +79,36 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : The given string is NOT a Palindrome.");
         }
+        // Hardcoded String
+        String input1 = "level";
+
+        // Create Stack
+        Stack<Character> stack = new Stack<>();
+
+        // Push characters into stack
+        for (int i = 0; i < input1.length(); i++) {
+            stack.push(input1.charAt(i));
+        }
+
+        boolean isPalindrome1 = true;
+
+        // Pop characters and compare
+        for (int i = 0; i < input1.length(); i++) {
+            char poppedChar = stack.pop();  // Pop operation
+
+            if (input.charAt(i) != poppedChar) {
+                isPalindrome1 = false;
+                break;
+            }
+        }
+
+        // Print result
+        System.out.println("Input String : " + input1);
+
+        if (isPalindrome1) {
+            System.out.println("Result : The given string is a Palindrome.");
+        } else {
+            System.out.println("Result : The given string is NOT a Palindrome.");
+        }
     }
-}
+    }
