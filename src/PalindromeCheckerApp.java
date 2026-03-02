@@ -94,6 +94,7 @@ public class PalindromeCheckerApp {
 
 
 
+
     public static void main(String[] args) {
 
         // Display Welcome Banner
@@ -399,5 +400,94 @@ public class PalindromeCheckerApp {
 
         System.out.println("==========================================");
         System.out.println("Application Finished Successfully.");
+        String input9 = "AmanaplanacanalPanama";
+        input = input9.toLowerCase();
+
+        System.out.println("Input String : " + input9);
+        System.out.println("--------------------------------------");
+
+        // 1️⃣ Two-Pointer Approach
+        long start2 = System.nanoTime();
+        boolean result4 = twoPointerCheck(input);
+        long end2 = System.nanoTime();
+
+        // 2️⃣ Stack Approach
+        long start3 = System.nanoTime();
+        boolean result5 = stackCheck(input);
+        long end3 = System.nanoTime();
+
+        // 3️⃣ Deque Approach
+        long start4 = System.nanoTime();
+        boolean result6 = dequeCheck(input);
+        long end4 = System.nanoTime();
+
+        // Display Results
+        System.out.println("Two-Pointer Result : " + result4);
+        System.out.println("Execution Time     : " + (end2 - start2) + " ns");
+        System.out.println();
+
+        System.out.println("Stack Result       : " + result5);
+        System.out.println("Execution Time     : " + (end3 - start3) + " ns");
+        System.out.println();
+
+        System.out.println("Deque Result       : " + result6);
+        System.out.println("Execution Time     : " + (end4 - start4) + " ns");
+        System.out.println();
+
+        System.out.println("Program executed successfully.");
+    }
+
+    // Two-Pointer Method
+    public static boolean twoPointerCheck(String str) {
+
+        int start = 0;
+        int end = str.length() - 1;
+
+        while (start < end) {
+            if (str.charAt(start) != str.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+
+    // Stack Method
+    public static boolean stackCheck(String str) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < str.length(); i++) {
+            stack.push(str.charAt(i));
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Deque Method
+    public static boolean dequeCheck(String str) {
+
+        Deque<Character> deque = new LinkedList<>();
+
+        for (int i = 0; i < str.length(); i++) {
+            deque.addLast(str.charAt(i));
+        }
+
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+        }
+
+        return true;
     }
     }
+
